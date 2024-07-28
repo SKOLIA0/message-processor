@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Message Processor Service</title>
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+            const messageContent = document.getElementById('messageContent').value;
+            const data = { content: messageContent };
+
+            fetch('/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (response.status === 201) {
+                        alert('Message created successfully!');
+                    } else {
+                        response.text().then(text => alert('Error: ' + text));
+                    }
+                })
+                .catch(error => alert('Error: ' + error));
+        }
+    </script>
+</head>
+<body>
+<h1>Welcome to the Message Processor Service</h1>
+<form onsubmit="submitForm(event)">
+    <label for="messageContent">Message:</label>
+    <input type="text" id="messageContent" name="messageContent" required>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
