@@ -1,25 +1,54 @@
-.env будет актуален до 2 августа 2024
-
+.env оставлен намеренно
 
 сколонировать репрозиторий и использовать
 ```
-
+git clone https://github.com/SKOLIA0/message-processor.git
+cd message-processor
 docker-compose up --build
-
-
 ```
-For a typical production Kafka broker:
+проверить что работают все 3 контейнера
 
-
-    CPU: 8 cores @ 2.0 GHz or faster
-
+app
     
-    Memory: 32 GB RAM
-
+kafka
     
-    Disk: SSD storage with RAID 10 configuration
+zookeeper
+```
+sudo docker ps
+```
+иначе повторять пока не запустятся все три
+```
+sudo docker-compose down
+sudo docker-compose up -d
+```
+проверка
+```
+sudo docker ps
+```
 
-    
-    Network: 10 Gbps Ethernet
+Откройте Postman и нажмите на кнопку "New" -> "HTTP Request".
 
-    
+Выберите метод POST.
+
+Введите URL сервиса 
+```
+http://82.97.241.37/messages
+```
+Перейдите на вкладку "Body".
+
+Выберите формат raw.
+
+В выпадающем списке выберите JSON.
+
+Введите тело вашего запроса в формате JSON.
+```
+{
+    "message": "Hello, Messaggio GO!"
+}
+```
+Выберите метод GET.
+
+Введите URL сервиса 
+```
+http://82.97.241.37/stats
+```
