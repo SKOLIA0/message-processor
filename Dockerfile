@@ -17,5 +17,5 @@ COPY --from=builder /message-processor /message-processor
 COPY --from=builder /app/static /static
 COPY .env .env
 
-#EXPOSE 8080
+EXPOSE 8080
 CMD ["/message-processor"]
